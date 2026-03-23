@@ -49,6 +49,17 @@ header h1 {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
+.tools-section {
+    margin-bottom: 40px;
+}
+
+.tools-section h2 {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--primary);
+    display: inline-block;
+}
+
 .cookie-input {
     display: flex;
     gap: 10px;
@@ -91,41 +102,31 @@ button:hover {
     background: var(--danger);
 }
 
-.tabs {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.tab-btn {
-    background: var(--dark);
-    padding: 12px 24px;
-    border-radius: 8px;
-}
-
-.tab-btn.active {
-    background: var(--primary);
-}
-
-.tab-pane {
-    display: none;
-}
-
-.tab-pane.active {
-    display: block;
+.btn.secondary {
+    background: #4f545c;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
+    margin-top: 15px;
 }
 
 .feature-card {
     background: var(--dark);
     padding: 15px;
     border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+    color: var(--primary);
 }
 
 .warning-box {
