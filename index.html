@@ -24,71 +24,32 @@
             <div id="cookiesList"></div>
         </div>
 
-        <!-- علامات التبويب للميزات -->
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="info">📊 معلومات الحساب</button>
-            <button class="tab-btn" data-tab="mass">⚡ الإجراءات الجماعية</button>
-            <button class="tab-btn" data-tab="nuke">💣 Nuke Account</button>
-            <button class="tab-btn" data-tab="steal">👕 سرقة الملابس</button>
-            <button class="tab-btn" data-tab="advanced">🔧 أدوات متقدمة</button>
-        </div>
-
-        <!-- محتوى علامات التبويب -->
-        <div class="tab-content">
-            <!-- علامة معلومات الحساب -->
-            <div id="info-tab" class="tab-pane active">
-                <div class="info-card">
-                    <h3>معلومات الحساب</h3>
+        <!-- قسم الأدوات الأساسية -->
+        <div class="tools-section">
+            <h2>⚡ الأدوات الأساسية</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>📊 معلومات الحساب</h3>
                     <div id="accountInfo"></div>
                     <button id="refreshInfoBtn" class="btn secondary">🔄 تحديث المعلومات</button>
                 </div>
-            </div>
 
-            <!-- علامة الإجراءات الجماعية -->
-            <div id="mass-tab" class="tab-pane">
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3>🏃 مغادرة المجموعات</h3>
-                        <input type="text" placeholder="معرفات المجموعات (مفصولة بفاصلة)" id="groupIds">
-                        <button class="btn mass-action" data-action="leave-groups">تنفيذ</button>
-                    </div>
-                    <div class="feature-card">
-                        <h3>👥 إلغاء الصداقة الجماعي</h3>
-                        <button class="btn mass-action" data-action="unfriend-all">إلغاء كل الأصدقاء</button>
-                    </div>
-                    <div class="feature-card">
-                        <h3>📧 حذف التيشيرتات</h3>
-                        <button class="btn mass-action" data-action="delete-tshirts">حذف الكل</button>
-                    </div>
-                    <!-- باقي الميزات بنفس النمط -->
+                <div class="feature-card">
+                    <h3>🏃 مغادرة المجموعات</h3>
+                    <input type="text" placeholder="معرفات المجموعات (مفصولة بفاصلة)" id="groupIds">
+                    <button class="btn mass-action" data-action="leave-groups">تنفيذ</button>
                 </div>
-            </div>
 
-            <!-- علامة Nuke Account -->
-            <div id="nuke-tab" class="tab-pane">
-                <div class="warning-box">
-                    ⚠️ تحذير: هذه الإجراءات لا يمكن التراجع عنها وقد تؤدي إلى حظر الحساب!
+                <div class="feature-card">
+                    <h3>👥 إلغاء الصداقة الجماعي</h3>
+                    <button class="btn mass-action" data-action="unfriend-all">إلغاء كل الأصدقاء</button>
                 </div>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3>🏷️ تغيير الاسم</h3>
-                        <input type="text" placeholder="الاسم الجديد" id="newUsername">
-                        <button class="btn nuke-action" data-action="change-name">تغيير</button>
-                    </div>
-                    <div class="feature-card">
-                        <h3>📝 تغيير الوصف</h3>
-                        <textarea placeholder="الوصف الجديد" id="newDescription"></textarea>
-                        <button class="btn nuke-action" data-action="change-description">تغيير</button>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🎭 تغيير الأفاتار</h3>
-                        <button class="btn nuke-action" data-action="change-avatar">تغيير عشوائي</button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- علامة سرقة الملابس -->
-            <div id="steal-tab" class="tab-pane">
+                <div class="feature-card">
+                    <h3>📧 حذف التيشيرتات</h3>
+                    <button class="btn mass-action" data-action="delete-tshirts">حذف الكل</button>
+                </div>
+
                 <div class="feature-card">
                     <h3>👕 سرقة ملابس المجموعة</h3>
                     <input type="text" placeholder="معرف المجموعة" id="groupId">
@@ -96,23 +57,43 @@
                     <div id="stealResult"></div>
                 </div>
             </div>
+        </div>
 
-            <!-- علامة الأدوات المتقدمة -->
-            <div id="advanced-tab" class="tab-pane">
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3>🔓 Pin Cracker</h3>
-                        <button id="pinCrackerBtn" class="btn">بدء التخمين</button>
-                    </div>
-                    <div class="feature-card">
-                        <h3>📤 رفع ملابس جماعي</h3>
-                        <input type="file" multiple id="clothesUpload">
-                        <button id="uploadClothesBtn" class="btn">رفع</button>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🎮 إنشاء Gamepasses جماعي</h3>
-                        <button id="createGamepassesBtn" class="btn">إنشاء</button>
-                    </div>
+        <!-- قسم الأدوات المتقدمة -->
+        <div class="tools-section">
+            <h2>💣 الأدوات المتقدمة (حذر)</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🏷️ تغيير الاسم (Nuke)</h3>
+                    <input type="text" placeholder="الاسم الجديد" id="newUsername">
+                    <button class="btn nuke-action" data-action="change-name">تغيير</button>
+                </div>
+
+                <div class="feature-card">
+                    <h3>📝 تغيير الوصف (Nuke)</h3>
+                    <textarea placeholder="الوصف الجديد" id="newDescription"></textarea>
+                    <button class="btn nuke-action" data-action="change-description">تغيير</button>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🎭 تغيير الأفاتار (Nuke)</h3>
+                    <button class="btn nuke-action" data-action="change-avatar">تغيير عشوائي</button>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🔓 Pin Cracker</h3>
+                    <button id="pinCrackerBtn" class="btn">بدء التخمين</button>
+                </div>
+
+                <div class="feature-card">
+                    <h3>📤 رفع ملابس جماعي</h3>
+                    <input type="file" multiple id="clothesUpload">
+                    <button id="uploadClothesBtn" class="btn">رفع</button>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🎮 إنشاء Gamepasses جماعي</h3>
+                    <button id="createGamepassesBtn" class="btn">إنشاء</button>
                 </div>
             </div>
         </div>
