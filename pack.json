@@ -1,7 +1,7 @@
 {
   "name": "roblox-mass-tools-web",
   "version": "1.0.0",
-  "description": "Web version of Roblox Mass Tools",
+  "description": "Web version of Roblox Mass Tools with full API integration",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -11,7 +11,9 @@
     "express": "^4.18.2",
     "axios": "^1.6.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "form-data": "^4.0.0",
+    "fs": "^0.0.1-security"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
